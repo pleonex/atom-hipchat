@@ -13,7 +13,7 @@
     "atom-workspace": "atom-hipchat:toggle"
   },
   "repository": "https://github.com/pleonex/atom-hipchat",
-  "license": "GPLv3",
+  "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
