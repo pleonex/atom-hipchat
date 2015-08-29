@@ -1,7 +1,7 @@
 {
   "name": "hipchat",
   "main": "./lib/hipchat",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "HipChat client for Atom",
   "keywords": [
       "hipchat",
@@ -18,5 +18,6 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+      "restler": "^3.3.0"
   }
 }
