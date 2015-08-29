@@ -1,2 +1,2 @@
-# atom-hipchat
-Atom package to use HipChat
+# Atom HipChat
+Atom package to use HipChat.

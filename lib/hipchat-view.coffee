@@ -1,13 +1,13 @@
 module.exports =
-class AtomHipchatView
+class HipchatView
   constructor: (serializedState) ->
     # Create root element
     @element = document.createElement('div')
-    @element.classList.add('atom-hipchat')
+    @element.classList.add('hipchat')
 
     # Create message element
     message = document.createElement('div')
-    message.textContent = "The AtomHipchat package is Alive! It's ALIVE!"
+    message.textContent = "The Hipchat package is Alive! It's ALIVE!"
     message.classList.add('message')
     @element.appendChild(message)
 

@@ -1,40 +1,40 @@
-AtomHipchat = require '../lib/atom-hipchat'
+Hipchat = require '../lib/hipchat'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
 #
 # To run a specific `it` or `describe` block add an `f` to the front (e.g. `fit`
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
-describe "AtomHipchat", ->
+describe "Hipchat", ->
   [workspaceElement, activationPromise] = []
 
   beforeEach ->
     workspaceElement = atom.views.getView(atom.workspace)
-    activationPromise = atom.packages.activatePackage('atom-hipchat')
+    activationPromise = atom.packages.activatePackage('hipchat')
 
-  describe "when the atom-hipchat:toggle event is triggered", ->
+  describe "when the hipchat:toggle event is triggered", ->
     it "hides and shows the modal panel", ->
       # Before the activation event the view is not on the DOM, and no panel
       # has been created
-      expect(workspaceElement.querySelector('.atom-hipchat')).not.toExist()
+      expect(workspaceElement.querySelector('.hipchat')).not.toExist()
 
       # This is an activation event, triggering it will cause the package to be
       # activated.
-      atom.commands.dispatch workspaceElement, 'atom-hipchat:toggle'
+      atom.commands.dispatch workspaceElement, 'hipchat:toggle'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
-        expect(workspaceElement.querySelector('.atom-hipchat')).toExist()
+        expect(workspaceElement.querySelector('.hipchat')).toExist()
 
-        atomHipchatElement = workspaceElement.querySelector('.atom-hipchat')
-        expect(atomHipchatElement).toExist()
+        hipchatElement = workspaceElement.querySelector('.hipchat')
+        expect(hipchatElement).toExist()
 
-        atomHipchatPanel = atom.workspace.panelForItem(atomHipchatElement)
-        expect(atomHipchatPanel.isVisible()).toBe true
-        atom.commands.dispatch workspaceElement, 'atom-hipchat:toggle'
-        expect(atomHipchatPanel.isVisible()).toBe false
+        hipchatPanel = atom.workspace.panelForItem(hipchatElement)
+        expect(hipchatPanel.isVisible()).toBe true
+        atom.commands.dispatch workspaceElement, 'hipchat:toggle'
+        expect(hipchatPanel.isVisible()).toBe false
 
     it "hides and shows the view", ->
       # This test shows you an integration test testing at the view level.
@@ -45,18 +45,18 @@ describe "AtomHipchat", ->
       # workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement)
 
-      expect(workspaceElement.querySelector('.atom-hipchat')).not.toExist()
+      expect(workspaceElement.querySelector('.hipchat')).not.toExist()
 
       # This is an activation event, triggering it causes the package to be
       # activated.
-      atom.commands.dispatch workspaceElement, 'atom-hipchat:toggle'
+      atom.commands.dispatch workspaceElement, 'hipchat:toggle'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
         # Now we can test for view visibility
-        atomHipchatElement = workspaceElement.querySelector('.atom-hipchat')
-        expect(atomHipchatElement).toBeVisible()
-        atom.commands.dispatch workspaceElement, 'atom-hipchat:toggle'
-        expect(atomHipchatElement).not.toBeVisible()
+        hipchatElement = workspaceElement.querySelector('.hipchat')
+        expect(hipchatElement).toBeVisible()
+        atom.commands.dispatch workspaceElement, 'hipchat:toggle'
+        expect(hipchatElement).not.toBeVisible()

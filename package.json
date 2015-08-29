@@ -1,6 +1,6 @@
 {
-  "name": "atom-hipchat",
-  "main": "./lib/atom-hipchat",
+  "name": "hipchat",
+  "main": "./lib/hipchat",
   "version": "0.1.0",
   "description": "HipChat client for Atom",
   "keywords": [
@@ -10,7 +10,7 @@
       "communication"
   ],
   "activationCommands": {
-    "atom-workspace": "atom-hipchat:toggle"
+    "atom-workspace": "hipchat:toggle"
   },
   "repository": "https://github.com/pleonex/atom-hipchat",
   "license": "MIT",

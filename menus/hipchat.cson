@@ -2,19 +2,19 @@
 'context-menu':
   'atom-text-editor': [
     {
-      'label': 'Toggle atom-hipchat'
-      'command': 'atom-hipchat:toggle'
+      'label': 'Toggle HipChat'
+      'command': 'hipchat:toggle'
     }
   ]
 'menu': [
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'atom-hipchat'
+      'label': 'hipchat'
       'submenu': [
         {
           'label': 'Toggle'
-          'command': 'atom-hipchat:toggle'
+          'command': 'hipchat:toggle'
         }
       ]
     ]
