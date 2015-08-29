@@ -10,7 +10,7 @@
   {
     'label': 'Packages'
     'submenu': [
-      'label': 'hipchat'
+      'label': 'HipChat'
       'submenu': [
         {
           'label': 'Toggle'
