@@ -39,13 +39,14 @@ module.exports = Hipchat =
       query: {
         'start-index': 0,
         'max-results': 10,
+        'expand': 'items'
         },
       accessToken: atom.config.get('hipchat.token')
       }).on 'complete', (result) =>  @showUsers result
 
   showUsers: (data) ->
     console.log('received users:')
-    console.log(u.mention_name + ' - ' + u.name) for u in data.items
+    console.log(u.name + ' - ' + u.presence?.show) for u in data.items
 
   deactivate: ->
     @modalPanel.destroy()
