@@ -2,9 +2,9 @@
 
 module.exports =
 class UsersView extends SelectListView
-  initialize: (@listOfItems) ->
+  initialize: () ->
     super
-    @setItems(@listOfItems)
+    @setMaxItems(10)
 
   getFilterKey: ->
     'mention_name'
