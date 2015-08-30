@@ -10,6 +10,10 @@
           'label': 'Toggle'
           'command': 'hipchat:toggle'
         }
+        {
+          'label': 'Show users'
+          'command': 'hipchat:showUsers'
+        }
       ]
     ]
   }

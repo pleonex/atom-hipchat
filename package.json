@@ -18,6 +18,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-      "restler": "^3.3.0"
+      "restler": "^3.3.0",
+      "atom-space-pen-views": "^2.0.0"
   }
 }

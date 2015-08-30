@@ -1,4 +1,3 @@
-HipchatView = require './hipchat-view'
 Rest = require 'restler'
 {CompositeDisposable} = require 'atom'
 
@@ -17,16 +16,9 @@ module.exports = Hipchat =
       title: 'User email'
       default: ''
 
-  hipchatView: null
-  modalPanel: null
   subscriptions: null
 
   activate: (state) ->
-    @hipchatView = new HipchatView(state.hipchatViewState)
-    @modalPanel = atom.workspace.addModalPanel(
-      item: @hipchatView.getElement(),
-      visible: false)
-
     # Events subscribed to in atom's system can be easily cleaned up with a
     # CompositeDisposable
     @subscriptions = new CompositeDisposable
@@ -36,9 +28,11 @@ module.exports = Hipchat =
       atom.commands.add 'atom-workspace', 'hipchat:toggle': => @toggle())
     @subscriptions.add(
       atom.commands.add 'atom-workspace', 'hipchat:printUsers':=> @printUsers())
+    @subscriptions.add(
+      atom.commands.add 'atom-workspace',
+        'hipchat:showUsers': => @showUsers().toggle())
 
-  printUsers: ->
-    console.log('getting users')
+  getUsers: (callback) ->
     Rest.get(ApiUrl + 'v2/user', {
       query: {
         'start-index': 0,
@@ -46,22 +40,28 @@ module.exports = Hipchat =
         'expand': 'items'
         },
       accessToken: atom.config.get('hipchat.token')
-      }).on 'complete',
-        (result) ->
-          console.log u.name + ' - ' + u.presence?.show for u in result.items
+      }).on 'complete', (result) -> callback(result)
+
+  showUsers: ->
+    unless @usersView?
+      UsersView = require './users-view'
+      @usersView = new UsersView()
+
+      @usersView.setLoading('Getting users\u2026')
+      @getUsers (result) =>
+        @usersView.setItems(u.name for u in result.items)
+
+    @usersView
+
+  printUsers: ->
+    console.log('getting users')
+    @getUsers (result) -> console.log result
 
   deactivate: ->
-    @modalPanel.destroy()
     @subscriptions.dispose()
-    @hipchatView.destroy()
 
   serialize: ->
-    hipchatViewState: @hipchatView.serialize()
+
 
   toggle: ->
     console.log 'HipChat was toggled!'
-
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    #else
-    #  @modalPanel.show()
