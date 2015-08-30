@@ -1,5 +1,5 @@
 {
-  "name": "hipchat",
+  "name": "hipchat-chat",
   "main": "./lib/hipchat",
   "version": "0.0.0",
   "description": "HipChat client for Atom",
