@@ -36,7 +36,7 @@ module.exports = Hipchat =
     Rest.get(ApiUrl + 'v2/user', {
       query: {
         'start-index': 0,
-        'max-results': 10,
+        'max-results': 100,
         'expand': 'items'
         },
       accessToken: atom.config.get('hipchat.token')
