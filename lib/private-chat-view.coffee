@@ -23,8 +23,20 @@ class UsersView extends View
 
   send: ->
     msg = @msgEditor.getModel().getText()
-    @conversation.append "Me: #{msg}<br/>"
-    @msgEditor.getModel().setText('')
+
+    Rest.postJson(ApiUrl + 'v2/user/' + @remoteUser.id + '/message', {
+      'message': msg,
+      'message_format': 'text'
+      }, {
+      accessToken: atom.config.get('hipchat.token')
+      }).on 'complete',
+        (response) =>
+          if response == ""
+            @conversation.append "Me: #{msg}<br/>"
+            @msgEditor.getModel().setText('')
+          else
+            console.log "Error:"
+            console.log response
 
   addPastHistory: ->
     Rest.get(ApiUrl + 'v2/user/' + @remoteUser.id + '/history', {
@@ -34,4 +46,4 @@ class UsersView extends View
       accessToken: atom.config.get('hipchat.token')
       }).on 'complete',
         (result) => @conversation.append(
-          "#{@remoteUser.name}: #{msg.message}" for msg in result.items)
+          "#{@remoteUser.name}: #{msg.message}<br/>" for msg in result.items)
