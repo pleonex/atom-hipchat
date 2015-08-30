@@ -7,7 +7,28 @@ class UsersView extends SelectListView
     @setItems(@listOfItems)
 
   viewForItem: (item) ->
-    $$ -> @li(item)
+    $$ ->
+      @li class: 'two-lines', =>
+        if item.presence?.show == 'away'
+          status = 'modified'
+        else if item.presence?.show == 'chat'
+          status = 'added'
+        else if item.presence?.show == 'dnd'
+          status = 'removed'
+        else if item.presence?.show == 'xa'
+          status = 'modified'
+        else
+          status = 'ignored'
+
+        if item.presence?.status?
+          @div class: "status status-#{status} icon icon-diff-#{status}", =>
+            @text "  (" + item.presence.status + ")"
+        else
+          @div class: "status status-#{status} icon icon-diff-#{status}"
+
+        @div class: "primary-line name icon icon-person", => @text item.name
+        @div class: "secondary-line alias no-icon", =>
+          @text "@" + item.mention_name
 
   destroy: ->
     @cancel()

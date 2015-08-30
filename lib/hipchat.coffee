@@ -49,7 +49,7 @@ module.exports = Hipchat =
 
       @usersView.setLoading('Getting users\u2026')
       @getUsers (result) =>
-        @usersView.setItems(u.name for u in result.items)
+        @usersView.setItems(result.items)
 
     @usersView
 
