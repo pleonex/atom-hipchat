@@ -9,3 +9,4 @@
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
   'ctrl-alt-i': 'hipchat:toggle'
+  'alt-shift-u': 'hipchat:printUsers'

@@ -1,5 +1,8 @@
 HipchatView = require './hipchat-view'
+Rest = require 'restler'
 {CompositeDisposable} = require 'atom'
+
+ApiUrl = 'https://api.hipchat.com/'
 
 module.exports = Hipchat =
   # Config schema
@@ -28,25 +31,24 @@ module.exports = Hipchat =
     # CompositeDisposable
     @subscriptions = new CompositeDisposable
 
-    # Register command that toggles this view
+    # Register commands
     @subscriptions.add(
-      atom.commands.add('atom-workspace', 'hipchat:toggle': => @toggle())
-      )
+      atom.commands.add 'atom-workspace', 'hipchat:toggle': => @toggle())
+    @subscriptions.add(
+      atom.commands.add 'atom-workspace', 'hipchat:printUsers':=> @printUsers())
 
+  printUsers: ->
     console.log('getting users')
-    @rest = require('restler')
-    @rest.get('https://api.hipchat.com/v2/user', {
+    Rest.get(ApiUrl + 'v2/user', {
       query: {
         'start-index': 0,
         'max-results': 10,
         'expand': 'items'
         },
       accessToken: atom.config.get('hipchat.token')
-      }).on 'complete', (result) =>  @showUsers result
-
-  showUsers: (data) ->
-    console.log('received users:')
-    console.log(u.name + ' - ' + u.presence?.show) for u in data.items
+      }).on 'complete',
+        (result) ->
+          console.log u.name + ' - ' + u.presence?.show for u in result.items
 
   deactivate: ->
     @modalPanel.destroy()
