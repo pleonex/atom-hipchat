@@ -6,6 +6,9 @@ class UsersView extends SelectListView
     super
     @setItems(@listOfItems)
 
+  getFilterKey: ->
+    'mention_name'
+
   viewForItem: (item) ->
     $$ ->
       @li class: 'two-lines', =>
