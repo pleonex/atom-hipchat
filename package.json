@@ -10,7 +10,7 @@
       "communication"
   ],
   "activationCommands": {
-    "atom-workspace": "hipchat:toggle"
+    "atom-workspace": "hipchat:showUsers"
   },
   "repository": "https://github.com/pleonex/atom-hipchat",
   "license": "MIT",

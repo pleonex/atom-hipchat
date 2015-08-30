@@ -24,13 +24,10 @@ module.exports = Hipchat =
     @subscriptions = new CompositeDisposable
 
     # Register commands
-    @subscriptions.add(
-      atom.commands.add 'atom-workspace', 'hipchat:toggle': => @toggle())
-    @subscriptions.add(
-      atom.commands.add 'atom-workspace', 'hipchat:printUsers':=> @printUsers())
-    @subscriptions.add(
-      atom.commands.add 'atom-workspace',
-        'hipchat:showUsers': => @showUsers().toggle())
+    @subscriptions.add(atom.commands.add 'atom-workspace',
+      'hipchat:printUsers':=> @printUsers())
+    @subscriptions.add(atom.commands.add 'atom-workspace',
+      'hipchat:showUsers': => @showUsers().toggle())
 
   getUsers: (callback) ->
     Rest.get(ApiUrl + 'v2/user', {
@@ -59,9 +56,3 @@ module.exports = Hipchat =
 
   deactivate: ->
     @subscriptions.dispose()
-
-  serialize: ->
-
-
-  toggle: ->
-    console.log 'HipChat was toggled!'

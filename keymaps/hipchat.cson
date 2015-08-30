@@ -8,6 +8,5 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
 'atom-workspace':
-  'ctrl-alt-i': 'hipchat:toggle'
   'ctrl-alt-u': 'hipchat:showUsers'
   'alt-shift-u': 'hipchat:printUsers'
