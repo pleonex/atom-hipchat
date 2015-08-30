@@ -41,7 +41,14 @@ class UsersView extends SelectListView
     @hide()
 
   confirmed: (item) ->
-    console.log("confirmed", item)
+    PrivateChatView = require './private-chat-view'
+    privateChat = new PrivateChatView(item)
+
+    pane = atom.workspace.getActivePane()
+    paneItem = pane.addItem privateChat
+    pane.activateItem paneItem
+
+    @cancel()
 
   show: ->
     @storeFocusedElement()
