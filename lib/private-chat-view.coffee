@@ -19,7 +19,11 @@ class UsersView extends View
     atom.commands.add @msgEditor.element, 'core:confirm': => @send()
     @msgEditor.focus()
 
-    @addPastHistory()
+    callback = => @checkAndAppendMessages()
+    @interval = setInterval(callback, 5000)
+
+  destroy: ->
+    clearInterval(@interval)
 
   send: ->
     msg = @msgEditor.getModel().getText()
@@ -38,12 +42,29 @@ class UsersView extends View
             console.log "Error:"
             console.log response
 
-  addPastHistory: ->
+  checkAndAppendMessages: ->
+    console.log if @lastQuery? then parseInt @lastQuery.getTime() / 1000 else
+      'recent'
+
     Rest.get(ApiUrl + 'v2/user/' + @remoteUser.id + '/history', {
       query: {
-        'max-results': 10
+        'max-results': 10,
+        'date': 'recent'
         },
       accessToken: atom.config.get('hipchat.token')
       }).on 'complete',
-        (result) => @conversation.append(
-          "#{@remoteUser.name}: #{msg.message}<br/>" for msg in result.items)
+        (result) =>
+          found = false
+          for msg in result.items
+            if found
+              @conversation.append("#{@remoteUser.name}: #{msg.message}<br/>")
+
+            if msg.id == @lastId
+              found = true
+
+          if not found
+            @conversation.append(
+              "#{@remoteUser.name}: #{m.message}<br/>" for m in result.items)
+
+          if result.items.length > 0
+            @lastId = result.items[result.items.length - 1].id
