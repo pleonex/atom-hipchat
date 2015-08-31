@@ -1,7 +1,7 @@
 {
   "name": "hipchat-chat",
   "main": "./lib/hipchat",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "HipChat client for Atom",
   "keywords": [
     "hipchat",
