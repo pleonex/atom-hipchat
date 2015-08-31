@@ -32,7 +32,7 @@ class UsersView extends View
       'message': msg,
       'message_format': 'text'
       }, {
-      accessToken: atom.config.get('hipchat.token')
+      accessToken: atom.config.get('hipchat-chat.token')
       }).on 'complete',
         (response) =>
           if response == ""
@@ -51,7 +51,7 @@ class UsersView extends View
         'max-results': 10,
         'date': 'recent'
         },
-      accessToken: atom.config.get('hipchat.token')
+      accessToken: atom.config.get('hipchat-chat.token')
       }).on 'complete',
         (result) =>
           found = false

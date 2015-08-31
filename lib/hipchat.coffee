@@ -11,11 +11,6 @@ module.exports = Hipchat =
       title: 'User token'
       default: ''
 
-    user_email:
-      type: 'string'
-      title: 'User email'
-      default: ''
-
   subscriptions: null
 
   activate: (state) ->
@@ -36,7 +31,7 @@ module.exports = Hipchat =
         'max-results': 100,
         'expand': 'items'
         },
-      accessToken: atom.config.get('hipchat.token')
+      accessToken: atom.config.get('hipchat-chat.token')
       }).on 'complete', (result) -> callback(result)
 
   showUsers: ->
